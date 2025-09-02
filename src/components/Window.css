@@ -1,0 +1,196 @@
+.react-rnd-window {
+  border: 1px solid #e0e0e0;
+  border-radius: 12px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.08);
+  background: var(--window-bg);
+  overflow: hidden;
+  backdrop-filter: blur(10px);
+  z-index: 300;
+}
+
+.react-rnd-window.active {
+  box-shadow: 0 12px 48px rgba(0, 0, 0, 0.12);
+}
+
+.window-frame {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.window-header {
+  background: #ffffff;
+  color: #333333;
+  padding: 16px 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  cursor: grab;
+  font-size: 18px;
+  font-weight: 600;
+  border-bottom: 1px solid #f0f0f0;
+  letter-spacing: -0.02em;
+}
+
+.window-header:active {
+  cursor: grabbing;
+}
+
+.window-controls {
+  display: flex;
+  gap: 8px;
+  margin-left: auto;
+  order: 2;
+}
+
+.window-control {
+  width: 24px;
+  height: 24px;
+  border-radius: 6px;
+  border: 1px solid #e0e0e0;
+  background: #ffffff;
+  cursor: pointer;
+  font-size: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  line-height: 1;
+  transition: all 0.2s ease;
+  color: #666;
+  font-weight: 500;
+}
+
+.window-control.close {
+  background: #ffffff;
+  border-color: #7f58d7;
+  color: #7f58d7;
+  border-radius: 4px;
+}
+
+.window-control:hover {
+  background: #f8f9fa;
+  transform: scale(1.05);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.window-control.close:hover {
+  background: #7f58d7;
+  color: white;
+  border-radius: 4px;
+}
+
+.window-title {
+  font-weight: 600;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  color: #333;
+  font-size: 18px;
+  letter-spacing: -0.02em;
+  margin-right: 12px;
+  order: 1;
+}
+
+.window-content {
+  flex: 1;
+  overflow: auto;
+  background: #ffffff;
+  padding: 0;
+  border-radius: 0 0 12px 12px;
+}
+
+.window-content::-webkit-scrollbar {
+  width: 6px;
+}
+
+.window-content::-webkit-scrollbar-track {
+  background: transparent;
+  border-radius: 3px;
+}
+
+.window-content::-webkit-scrollbar-thumb {
+  background: rgba(200, 200, 200, 0);
+  border-radius: 3px;
+  min-height: 20px;
+  max-height: 60px;
+  transition: background-color 0.3s ease;
+}
+
+.window-content:hover::-webkit-scrollbar-thumb,
+.window-content:active::-webkit-scrollbar-thumb,
+.window-content:focus-within::-webkit-scrollbar-thumb {
+  background: rgba(200, 200, 200, 0.5);
+}
+
+.window-content::-webkit-scrollbar-thumb:hover {
+  background: rgba(180, 180, 180, 0.7);
+}
+
+.window-content::-webkit-scrollbar-thumb:active {
+  background: rgba(160, 160, 160, 0.9);
+}
+
+/* For Firefox */
+.window-content {
+  scrollbar-width: thin;
+  scrollbar-color: transparent transparent;
+}
+
+.window-content:hover,
+.window-content:active,
+.window-content:focus-within {
+  scrollbar-color: rgba(200, 200, 200, 0.4) transparent;
+}
+
+/* Modern resize handle */
+.react-rnd-window .react-resizable-handle {
+  position: absolute;
+  width: 16px;
+  height: 16px;
+  background: transparent;
+  cursor: se-resize;
+  bottom: 4px;
+  right: 4px;
+  border-radius: 4px;
+  transition: all 0.2s ease;
+}
+
+.react-rnd-window .react-resizable-handle::before {
+  content: '';
+  position: absolute;
+  bottom: 4px;
+  right: 4px;
+  width: 8px;
+  height: 8px;
+  border-right: 2px solid #d0d0d0;
+  border-bottom: 2px solid #d0d0d0;
+  border-radius: 0 0 2px 0;
+  transition: all 0.2s ease;
+}
+
+.react-rnd-window .react-resizable-handle:hover::before {
+  border-color: var(--primary-color);
+}
+
+.react-rnd-window .react-resizable-handle-se {
+  cursor: se-resize;
+}
+
+@media (max-width: 768px) {
+  .react-rnd-window {
+    min-width: 280px;
+    min-height: 180px;
+  }
+  
+  .window-header {
+    padding: 14px 18px;
+    font-size: 16px;
+  }
+  
+  .window-control {
+    width: 22px;
+    height: 22px;
+    font-size: 14px;
+  }
+}

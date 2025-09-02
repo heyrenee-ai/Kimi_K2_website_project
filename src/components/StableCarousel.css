@@ -1,0 +1,320 @@
+/* Stable Carousel Styles */
+.stable.carousel-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.9);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 99999;
+  animation: fadeIn 0.3s ease;
+  width: 100vw;
+  height: 100vh;
+  transition: opacity 0.3s ease, visibility 0.3s ease;
+}
+
+.stable.carousel-container {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  background: transparent;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  box-sizing: border-box;
+  animation: slideUp 0.4s ease;
+  pointer-events: none;
+}
+
+.stable.carousel-container > * {
+  pointer-events: auto;
+}
+
+.carousel-image-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  position: relative;
+}
+
+.carousel-image {
+  width: auto;
+  height: auto;
+  max-width: calc(100% - 40px);
+  max-height: calc(100% - 40px);
+  object-fit: contain;
+  display: block;
+  margin: auto;
+  border-radius: 8px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+  -webkit-transform: translateZ(0);
+  transform: translateZ(0);
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  will-change: transform, opacity;
+  perspective: 1000px;
+  contain: layout paint style;
+  opacity: 0;
+  animation: mountFade 0.01s forwards;
+}
+
+@keyframes mountFade {
+  to { opacity: 1; }
+}
+
+.stable.carousel-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.9);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  animation: fadeIn 0.3s ease;
+  width: 100%;
+  height: 100%;
+  will-change: auto;
+  isolation: isolate;
+  backface-visibility: hidden;
+  pointer-events: none;
+}
+
+.stable.carousel-overlay > * {
+  pointer-events: auto;
+}
+
+.carousel-image.transitioning {
+  opacity: 0.7;
+}
+
+/* Navigation buttons - positioned close to image */
+.carousel-nav {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: rgba(255, 255, 255, 0.95);
+  border: none;
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
+  font-size: 24px;
+  cursor: pointer;
+  z-index: 1001;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  opacity: 0.8;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  line-height: 1;
+  padding: 0;
+}
+
+.carousel-nav:hover {
+  background: white;
+  opacity: 1;
+  transform: translateY(-50%) scale(1.1);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.25);
+}
+
+.carousel-nav:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  transform: translateY(-50%) scale(1);
+}
+
+.carousel-nav.prev {
+  left: 30px;
+  right: auto;
+}
+
+.carousel-nav.next {
+  right: 30px;
+  left: auto;
+}
+
+.carousel-close {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  width: 24px;
+  height: 24px;
+  border-radius: 4px;
+  border: 1px solid rgba(255, 255, 255, 0.7);
+  background: rgba(0, 0, 0, 0.3);
+  color: rgba(255, 255, 255, 0.9);
+  font-size: 16px;
+  cursor: pointer;
+  z-index: 1001;
+  transition: all 0.2s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  line-height: 1;
+  font-weight: 500;
+  backdrop-filter: blur(5px);
+}
+
+.carousel-close:hover {
+  background: rgba(255, 255, 255, 0.2);
+  color: white;
+  transform: scale(1.1);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  border-color: rgba(255, 255, 255, 0.9);
+}
+
+.carousel-indicator {
+  position: absolute;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: rgba(0, 0, 0, 0.8);
+  color: white;
+  padding: 12px 24px;
+  border-radius: 25px;
+  font-size: 14px;
+  z-index: 10001;
+  transition: all 0.3s ease;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .stable.carousel-container {
+    padding: 0 80px;
+  }
+  
+  .carousel-nav.prev {
+    left: clamp(8px, 3%, 40px);
+  }
+  
+  .carousel-nav.next {
+    right: clamp(8px, 3%, 40px);
+  }
+  
+  .carousel-close {
+    top: 15px;
+    right: 15px;
+    width: 22px;
+    height: 22px;
+    font-size: 14px;
+    border-radius: 4px;
+    border: 1px solid rgba(255, 255, 255, 0.7);
+    background: rgba(0, 0, 0, 0.3);
+    color: rgba(255, 255, 255, 0.9);
+  }
+  
+  .carousel-nav {
+    width: 44px;
+    height: 44px;
+    font-size: 22px;
+  }
+}
+
+@media (max-width: 480px) {
+  .stable.carousel-container {
+    padding: 0 60px;
+  }
+  
+  .carousel-nav.prev {
+    left: clamp(5px, 2%, 30px);
+  }
+  
+  .carousel-nav.next {
+    right: clamp(5px, 2%, 30px);
+  }
+  
+  .carousel-close {
+    top: 10px;
+    right: 10px;
+    width: 20px;
+    height: 20px;
+    font-size: 12px;
+    border-radius: 3px;
+    border: 1px solid rgba(255, 255, 255, 0.7);
+    background: rgba(0, 0, 0, 0.3);
+    color: rgba(255, 255, 255, 0.9);
+  }
+  
+  .carousel-nav {
+    width: 40px;
+    height: 40px;
+    font-size: 20px;
+  }
+}
+
+/* Gallery styles */
+.projects-content {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  overflow-y: auto;
+}
+
+.projects-title {
+  color: #7f58d7;
+  text-align: center;
+  margin-bottom: 5px;
+  font-size: 24px;
+  font-weight: 600;
+}
+
+.projects-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+  gap: 20px;
+  padding: 5px 20px 20px 20px;
+  justify-items: center;
+  align-items: start;
+}
+
+.project-thumbnail {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 1;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  cursor: pointer;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  max-width: 150px;
+}
+
+.project-thumbnail:hover {
+  transform: scale(1.05);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+.thumbnail-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes slideUp {
+  from {
+    transform: translateY(20px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
